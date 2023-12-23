@@ -64,25 +64,17 @@ const images = [
   },
 ];
 
-console.log('Hello');
-
 const container = document.querySelector(".gallery");
 container.innerHTML = createMarkup(images);
 
 container.addEventListener("click", handleContainerClick); 
 
-function handleContainerClick(event) {
-  if (event.target === event.currentTarget) {
-    return;
-  }
-   event.preventDefault();
-}
-
 function createMarkup(arr) {
     return arr.map(({preview, original, description}) => `
     <li class="gallery-item">
     <a class="gallery-link" href="${original}">
-    <img class="gallery-image"
+    <img 
+    class="gallery-image"
     src="${preview}"
     data-source="${original}"
     alt="${description}"/>
@@ -90,6 +82,33 @@ function createMarkup(arr) {
     </li>`
     ).join("")
 }
+
+function handleContainerClick(event) {
+  if (event.target === event.currentTarget) {
+    return;
+  }
+  event.preventDefault();
+   
+  const instance = basicLightbox.create(`
+	  <div class="modal">
+      <img src= ${event.target.dataset.source} width="100%" height="100%" ></img>
+    </div>
+`)
+  instance.show() 
+
+  container.addEventListener("keydown", escapeClose);
+  function escapeClose(event) {
+    if (event.code === "Escape") {
+      instance.close()
+      container.removeEventListener("keydown", escapeClose);
+    }
+  }
+}
+
+
+
+
+
 
 
 

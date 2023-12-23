@@ -4,7 +4,6 @@
 
 body {
   background-color: #fafafa;
-
 }
 
 a {
@@ -37,4 +36,15 @@ img {
 .gallery-item {
   width: 360px;
   height: 200px;
+  transition: transform .3s;
+}
+
+.gallery-item:hover {
+  transform: scale(1.04);
+}
+
+.modal {
+  width: 1440px;
+  height: 696px;
+  padding: 28px 164px;
 }
