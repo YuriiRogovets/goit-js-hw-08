@@ -96,11 +96,11 @@ function handleContainerClick(event) {
 `)
   instance.show() 
 
-  container.addEventListener("keydown", escapeClose);
+  document.addEventListener("keydown", escapeClose);
   function escapeClose(event) {
     if (event.code === "Escape") {
       instance.close()
-      container.removeEventListener("keydown", escapeClose);
+      document.removeEventListener("keydown", escapeClose);
     }
   }
 }
